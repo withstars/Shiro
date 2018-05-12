@@ -13,8 +13,8 @@
                      diskExpiryThreadIntervalSeconds = "120"
                      memoryStoreEvictionPolicy = "LFU"     />
 
-    <cache name="passwordRetryCache" eternal="false"
-           timeToIdleSeconds="600" timeToLiveSeconds="0" overflowToDisk="false"
+    <cache name="loginRetryCache" eternal="false"
+           timeToIdleSeconds="300" timeToLiveSeconds="0" overflowToDisk="false"
            statistics="true">
     </cache>
 

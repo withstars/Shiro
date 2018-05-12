@@ -8,6 +8,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -77,8 +78,10 @@ public class CustomRealm extends AuthorizingRealm {
         }
         //获取从数据库查询出来的用户密码
         String realPassword = userService.getPasswd(user);
+        // 获取salt2
+        String salt2 = userService.getSalt(user);
         //返回认证信息由父类 AuthenticatingRealm 进行认证
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userName,realPassword,this.getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userName,realPassword,ByteSource.Util.bytes(userName+salt2),this.getName());
         return info;
     }
 }

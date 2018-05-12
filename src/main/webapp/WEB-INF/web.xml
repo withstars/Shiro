@@ -17,8 +17,6 @@
         </listener-class>
     </listener>
 
-
-
     <!-- spring MVC 的主控servlet -->
     <servlet>
         <servlet-name>main</servlet-name>

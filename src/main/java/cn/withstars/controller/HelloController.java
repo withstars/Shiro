@@ -123,11 +123,9 @@ public class HelloController {
         // 密码处理
         User user = new User();
         user.setUsername(userName);
-        String salt2=userService.getSalt(user);
-        String password = PasswordUtil.encodePasswd(userName,salt2,passwd);
         Subject subject = SecurityUtils.getSubject();
 
-        UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+        UsernamePasswordToken token = new UsernamePasswordToken(userName, passwd);
         if (rememberMe != null){
             token.setRememberMe(true);
         }
