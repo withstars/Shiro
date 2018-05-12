@@ -1,0 +1,9 @@
+cn\withstars\dao\UserMapper.class
+cn\withstars\domain\BaseDomain.class
+cn\withstars\util\RetryLimitCredentialsMatcher.class
+cn\withstars\controller\HelloController.class
+cn\withstars\service\impl\UserServiceImpl.class
+cn\withstars\util\PasswordUtil.class
+cn\withstars\filter\CustomRealm.class
+cn\withstars\domain\User.class
+cn\withstars\service\UserService.class
