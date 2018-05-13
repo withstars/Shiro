@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
@@ -23,9 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @Controller
-public class HelloController {
+public class IndexController {
 
-    private static final Logger logger=Logger.getLogger(HelloController.class);
+    private static final Logger logger=Logger.getLogger(IndexController.class);
 
     @Autowired
     public UserServiceImpl userService;
@@ -74,6 +73,15 @@ public class HelloController {
     public String logout(){
         SecurityUtils.getSubject().logout();
         return "login";
+    }
+    @RequestMapping(value = "/admin/user")
+    public String userManage(){
+        return "user_manage";
+    }
+
+    @RequestMapping(value = "/forbiden")
+    public String forbiden(){
+        return "forbiden";
     }
     /**
      * 注册处理

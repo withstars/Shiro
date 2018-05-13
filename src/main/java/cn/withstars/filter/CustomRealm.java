@@ -1,6 +1,9 @@
 package cn.withstars.filter;
 
+import cn.withstars.domain.Role;
 import cn.withstars.domain.User;
+import cn.withstars.service.impl.PermissionServiceImpl;
+import cn.withstars.service.impl.RoleServiceImpl;
 import cn.withstars.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
 import org.apache.shiro.authc.*;
@@ -28,6 +31,10 @@ public class CustomRealm extends AuthorizingRealm {
 
     @Autowired
     public UserServiceImpl userService;
+    @Autowired
+    public RoleServiceImpl roleService;
+    @Autowired
+    public PermissionServiceImpl permissionService;
     /**
      * 授权
      * @param principalCollection
@@ -36,20 +43,18 @@ public class CustomRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         // 获取身份信息
         String userName = (String) principalCollection.getPrimaryPrincipal();
+        User user = new User();
+        user.setUsername(userName);
         // 根据身份信息从数据库中查询权限数据
-        // 这里使用静态数据模拟
-        List<String> permissionList=new ArrayList<String>();
-        permissionList.add("user:add");
-        permissionList.add("user:delete");
-        if (userName.equals("zhou")) {
-            permissionList.add("user:query");
-        }
+        List<String> permissionList = permissionService.getPermissions(user);
+        Role role = roleService.getRoleByUser(user);
+        String roleName = role.getName();
+
         // 将权限信息封闭为AuthorizationInfo
         SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
-
         info.addStringPermissions(permissionList);
-        // 模拟数据，添加 manager 角色
-        info.addRole("admin");
+        info.addRole(roleName);
+
         return info;
     }
 

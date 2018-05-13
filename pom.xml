@@ -235,6 +235,8 @@
             <artifactId>shiro-ehcache</artifactId>
             <version>1.4.0</version>
         </dependency>
+
+
     </dependencies>
     <build>
         <finalName>Genesis</finalName>
@@ -265,9 +267,9 @@
                     <threadCount>10</threadCount>
                 </configuration>
             </plugin>
-
-
-
         </plugins>
     </build>
+
+
+
 </project>
