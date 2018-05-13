@@ -49,12 +49,11 @@ public class CustomRealm extends AuthorizingRealm {
         List<String> permissionList = permissionService.getPermissions(user);
         Role role = roleService.getRoleByUser(user);
         String roleName = role.getName();
-
         // 将权限信息封闭为AuthorizationInfo
         SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
         info.addStringPermissions(permissionList);
         info.addRole(roleName);
-
+        logger.warn("user:"+userName+",role:"+roleName+", permissions:"+permissionList);
         return info;
     }
 
@@ -89,4 +88,5 @@ public class CustomRealm extends AuthorizingRealm {
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userName,realPassword,ByteSource.Util.bytes(userName+salt2),this.getName());
         return info;
     }
+
 }

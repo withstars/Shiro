@@ -25,7 +25,6 @@ public class User extends BaseDomain{
 
     private String avatar;
 
-    private Byte type;
 
     private Byte status;
 
@@ -104,13 +103,6 @@ public class User extends BaseDomain{
         this.avatar = avatar == null ? null : avatar.trim();
     }
 
-    public Byte getType() {
-        return type;
-    }
-
-    public void setType(Byte type) {
-        this.type = type;
-    }
 
     public void setStatus(Byte status) {
         this.status = status;
